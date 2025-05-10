@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_payroll">
+		<t t-call="web.html_container">
+			<style type="text/css">
+			    .payroll_report {
+			        width: 100%;
+			        border-collapse: collapse;
+			        table-layout: fixed;
+			    }
+
+			    .text_start {
+			    	text-align: left !important;
+			    }
+
+			    .payroll_report th, 
+			    .payroll_report td {
+			        padding: 4px;
+			        text-align: center;
+			    }
+
+			    .btp {
+			        border-top: 1px solid black;
+			    }
+			    .btm {
+			        border-bottom: 1px solid black;
+			    }
+			    .blt {
+			        border-left: 1px solid black;
+			    }
+
+			    @media print {
+			        <!-- .payroll_report th, 
+			        .payroll_report td {
+			            border: 1px solid black !important;
+			        } -->
+			        .btp {
+				        border-top: 1px solid black !important;
+				    }
+				    .btm {
+				        border-bottom: 1px solid black !important;
+				    }
+				    .blt {
+				        border-left: 1px solid black !important;
+				    }
+			    }
+			</style>
+			<div>
+				<table class="payroll_report" cellspacing="15" >
+					<tr>
+						<th colspan="4" class="text_start">Transfer to account</th>
+						<th colspan="4" class="text_start">Account Number</th>
+						<th colspan="4" class="text_start">Monthly employee type</th>
+						<th colspan="4" class="text_start">Date</th>
+					</tr>
+					<tr >
+						<td colspan="8" class="btp btm">Items are available</td>
+						<td colspan="8" class="btp btm">Broken Items</td>
+					</tr>
+					<tr>
+						<td colspan="2"></td>
+						<td colspan="1">day</td>
+						<td colspan="1">hours</td>
+						<td colspan="4" class="text_start">minutes</td>
+						<td colspan="2" class="blt"></td>
+						<td colspan="1">day</td>
+						<td colspan="1">hours</td>
+						<td colspan="4" class="text_start">minutes</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Work day</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">including labor costs</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">Missing Work</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">deduct absent from</td>
+						<td>-</td>
+						<td>baht</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Overtime 1.0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">Overtime pay 1.0</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">leave of absence</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">minus vacation leave</td>
+						<td>-</td>
+						<td>baht</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Overtime 1.5</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">Overtime pay 1.5</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">I'm late</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">deducted for being late</td>
+						<td>-</td>
+						<td>baht</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Overtime 2.0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">Overtime pay 2.0</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">Leave first</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">subtracted</td>
+						<td>-</td>
+						<td>baht</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Overtime 3.0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td class="text_start">Overtime pay 3.0</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">Tax</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">social</td>
+						<td>-</td>
+						<td>baht</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Overtime pay</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">food cost</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">Reserve fund,etc.</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">Advance</td>
+						<td>-</td>
+						<td>baht</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Diligence Allowance</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">skill value</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">Other deductions</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">Loan</td>
+						<td>-</td>
+						<td>baht</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Gasoline cost</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">postion fee</td>
+						<td>-</td>
+						<td>baht</td>
+						<td colspan="2" class="blt text_start">Accumulated deposits</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Bonus</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">Insentive</td>
+						<td>-</td>
+						<td >baht</td>
+						<td class="blt"></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Other Improvements</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">overtime fee</td>
+						<td>-</td>
+						<td >baht</td>
+						<td class="blt"></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text_start">Telephone bill</td>
+						<td></td>
+						<td>-</td>
+						<td>baht</td>
+						<td class="text_start">welfare money</td>
+						<td>-</td>
+						<td >baht</td>
+						<td class="blt"></td>
+					</tr>
+					<tr >
+						<td colspan="6" class="btp btm">Total income</td>
+						<td class="btp btm">-</td>
+						<td class="btp btm">baht</td>
+						<td colspan="6" class="blt btp btm">Total all expenses</td>
+						<td class="btp btm">-</td>
+						<td class="btp btm">baht</td>
+					</tr>
+					<tr >
+						<td colspan="3" class="btm text_start">Accumulated Income</td>
+						<td colspan="3" class="btm text_start">Accumulated Taxes</td>
+						<td colspan="2" class="btm text_start">Accumulated social security</td>
+						<td colspan="2" class="btm text_start">Accumulated social deposits</td>
+						<td colspan="4" class="btm blt text_start">Total net income</td>
+						<td class="btm">-</td>
+						<td class="btm">baht</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="btm text_start">-</td>
+						<td colspan="3" class="btm text_start">-</td>
+						<td colspan="2" class="btm text_start">-</td>
+						<td colspan="2" class="btm text_start">-</td>
+						<td colspan="2" class="blt">Signature</td>
+						<td colspan="4" class="btm"></td>
+					</tr>
+				</table>
+			</div>
+		</t>
+	</template>
+
+	<record id="action_report_payroll" model="ir.actions.report">
+        <field name="name">Payroll Report</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_report_customize.report_payroll</field>
+        <field name="report_file">hr_report_customize.report_payroll</field>
+        <field name="print_report_name">Payroll Report</field>
+    </record>
+
+	<record id="action_payroll_report" model="ir.actions.server">
+		<field name="name">Payroll Report</field>
+		<field name="model_id" ref="hr.model_hr_employee"/>
+		<field name="state">code</field>
+		<field name="code">
+			action = model.print_report()
+		</field>
+	</record>
+
+	<menuitem id="menu_payroll_report" name="Print Payroll Report" parent="hr.menu_hr_employee_payroll" sequence="110" action="action_payroll_report"/>
+</odoo>
